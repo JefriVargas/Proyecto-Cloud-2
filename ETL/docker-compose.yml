@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  etl:
+    build:
+      context: ./etl
+      dockerfile: Dockerfile
+    container_name: etl_container
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=resumenes_db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=123
+    volumes:
+      - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
+    command: ["python", "main.py"]
