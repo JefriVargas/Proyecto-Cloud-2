@@ -7,13 +7,15 @@ services:
       dockerfile: Dockerfile
     container_name: etl_container
     environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_REGION=${AWS_REGION}
-      - MYSQL_HOST=mysql
-      - MYSQL_DATABASE=resumenes_db
+      - AWS_ACCESS_KEY_ID=ASIAVRUVPMCXYDQJ2X4U
+      - AWS_SECRET_ACCESS_KEY=7avOt4yywPbvmVNku/Rg9LYPOV0oCXQ/qhzO6ies
+      - AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEJf//////////wEaCXVzLXdlc3QtMiJHMEUCIGuvmbPlOrrhYsB3aKAUW0GOvn/SltkqwH1lTnm8ftvyAiEAyiCYC4yGrjT/LbJJcEuNkRqVcuQeJw8t/hxWfO9XtncqnAIIPxAAGgwzODE0OTE4MzA5NTkiDBgsKGrPi92ZkURVSCr5AZUYIz0hwtkFtXQzp1tROENBWTMfGO2BCBGygnVbMsiWYCmUY6/siAbOr/cu3eBh0YdBnktwmoGc6jbDM5GtSUW+6ve+0yF7hr827RpTXhIzP0uKoayUlm64lWefqAk9TgWpyfSBbPMDJMt6rqRW2zCMHW/69iFlKeEdMQ9mg/Zo5iNN84hz5c6n8oaYofbGNbm/RKRXsAO6pN9zI4dV/WnEaFzkfuZfIWXRXx8sKt1O+OK7nQMraDgoz/FRzxHpmrbvnEIx83mzdWtPuD1f78bSXApJ0gaWi8lme0KRO2A9TOmxsHn1iVyP/GVkQDhdwW7wJejxO5mDrjCj85q6BjqdAfZcwT9GbTzcsR2UfGjZwww+c/NF5Oe97Wuz8nUdAF/GzrNh/AsN0BgkOX7p4zLkd0lVITbogONprkvlf7crPrAGi1aqWtMxI2MwDnZgAlLTM/rbx2opSTubFC+gGNc0N24Gr2rWwXDrxeUm2YRNrgmjjZVShx9dz2vIG+4Tx868x7EwLEE23iwBVyzfAq59zK2skiPpQAm/Rc/0750=
+      - AWS_REGION=us-east-1
+      - MYSQL_HOST=54.165.175.110
+      - MYSQL_DATABASE=cloud
       - MYSQL_USER=user
       - MYSQL_PASSWORD=123
+      - MYSQL_PORT=3306
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
     command: ["python", "main.py"]
