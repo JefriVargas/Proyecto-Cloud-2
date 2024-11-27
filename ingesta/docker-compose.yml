@@ -6,7 +6,7 @@ x-aws-env: &aws-credentials
   AWS_SESSION_TOKEN: IQoJb3JpZ2luX2VjEJf//////////wEaCXVzLXdlc3QtMiJHMEUCIGuvmbPlOrrhYsB3aKAUW0GOvn/SltkqwH1lTnm8ftvyAiEAyiCYC4yGrjT/LbJJcEuNkRqVcuQeJw8t/hxWfO9XtncqnAIIPxAAGgwzODE0OTE4MzA5NTkiDBgsKGrPi92ZkURVSCr5AZUYIz0hwtkFtXQzp1tROENBWTMfGO2BCBGygnVbMsiWYCmUY6/siAbOr/cu3eBh0YdBnktwmoGc6jbDM5GtSUW+6ve+0yF7hr827RpTXhIzP0uKoayUlm64lWefqAk9TgWpyfSBbPMDJMt6rqRW2zCMHW/69iFlKeEdMQ9mg/Zo5iNN84hz5c6n8oaYofbGNbm/RKRXsAO6pN9zI4dV/WnEaFzkfuZfIWXRXx8sKt1O+OK7nQMraDgoz/FRzxHpmrbvnEIx83mzdWtPuD1f78bSXApJ0gaWi8lme0KRO2A9TOmxsHn1iVyP/GVkQDhdwW7wJejxO5mDrjCj85q6BjqdAfZcwT9GbTzcsR2UfGjZwww+c/NF5Oe97Wuz8nUdAF/GzrNh/AsN0BgkOX7p4zLkd0lVITbogONprkvlf7crPrAGi1aqWtMxI2MwDnZgAlLTM/rbx2opSTubFC+gGNc0N24Gr2rWwXDrxeUm2YRNrgmjjZVShx9dz2vIG+4Tx868x7EwLEE23iwBVyzfAq59zK2skiPpQAm/Rc/0750=
   AWS_REGION: us-east-1
   S3_BUCKET: ciencia-de-datos
-  STAGE: dev
+  STAGE: test
 
 services:
   microservice1:
