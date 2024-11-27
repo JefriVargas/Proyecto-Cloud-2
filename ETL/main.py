@@ -115,7 +115,7 @@ def load_to_mysql(data, table_name):
             user=MYSQL_USER,
             password=MYSQL_PASSWORD,
             database=MYSQL_DATABASE,
-            port=MYSQL_PORT
+            port=int(MYSQL_PORT)
         )
         with connection.cursor() as cursor:
             for record in data:
