@@ -16,7 +16,7 @@ services:
       <<: *aws-credentials
       DYNAMODB_TABLES: Horarios
     container_name: dynamodb_microservice1
-    auto_remove: true
+    
 
   microservice2:
     build:
@@ -25,7 +25,7 @@ services:
       <<: *aws-credentials
       DYNAMODB_TABLES: Ordenes
     container_name: dynamodb_microservice2
-    auto_remove: true
+    
 
   microservice3:
     build:
@@ -34,7 +34,7 @@ services:
       <<: *aws-credentials
       DYNAMODB_TABLES: Peliculas
     container_name: dynamodb_microservice3
-    auto_remove: true
+    
 
   microservice4:
     build:
@@ -43,7 +43,7 @@ services:
       <<: *aws-credentials
       DYNAMODB_TABLES: Productos
     container_name: dynamodb_microservice4
-    auto_remove: true
+    
 
   microservice5:
     build:
@@ -52,4 +52,4 @@ services:
       <<: *aws-credentials
       DYNAMODB_TABLES: Reservas,Usuarios
     container_name: dynamodb_microservice5
-    auto_remove: true
+    
