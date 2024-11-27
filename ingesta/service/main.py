@@ -26,7 +26,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(log_file, mode="a"),
+        logging.FileHandler(log_file, mode="a", encoding="utf-8"),
         logging.StreamHandler()
     ]
 )
@@ -74,11 +74,15 @@ def transform_dynamodb_item(item):
     return {key: extract_value(value) for key, value in item.items()}
 
 def save_to_json_lines(data, file_name):
-    transformed_data = [transform_dynamodb_item(item) for item in data]
-    with open(file_name, mode='w', encoding='utf-8') as file:
-        for record in transformed_data:
-            file.write(json.dumps(record, ensure_ascii=False) + '\n')
-    logger.info(f"Archivo JSON Lines guardado: {file_name}")
+    try:
+        transformed_data = [transform_dynamodb_item(item) for item in data]
+        with open(file_name, mode='w', encoding='utf-8') as file:
+            for record in transformed_data:
+                file.write(json.dumps(record, ensure_ascii=False) + '\n')
+        logger.info(f"Archivo JSON Lines guardado: {file_name} con {len(data)} registros.")
+    except Exception as e:
+        logger.error(f"Error al guardar archivo JSON Lines: {e}")
+        raise
 
 def upload_to_s3(file_name, bucket, s3_key):
     try:
@@ -86,21 +90,34 @@ def upload_to_s3(file_name, bucket, s3_key):
         logger.info(f"Archivo subido exitosamente a S3: {s3_key}")
     except Exception as e:
         logger.error(f"Error al subir el archivo a S3: {e}")
+        raise
 
 if __name__ == "__main__":
     start_time = datetime.now()
-    logger.info("Inicio del proceso de ingesta")
+    logger.info(f"Inicio del proceso de ingesta - Contenedor: {CONTAINER_NAME}")
     try:
         for table in tables:
-            logger.info(f"Procesando tabla DynamoDB: {table}")
-            data = list(scan_dynamodb(table))
-            file_name = f"{table}_data.json"
-            save_to_json_lines(data, file_name)
-            folder_name = table.replace('-', '_')
-            s3_key = f"{folder_name}/{file_name}"
-            upload_to_s3(file_name, S3_BUCKET + "-" + STAGE, s3_key)
+            table_start_time = datetime.now()
+            logger.info(f"Procesando tabla DynamoDB: {table} - Inicio: {table_start_time}")
+            try:
+                data = list(scan_dynamodb(table))
+                logger.info(f"Tabla {table} escaneada. Registros encontrados: {len(data)}")
+
+                file_name = f"{table}_data.json"
+                save_to_json_lines(data, file_name)
+
+                folder_name = table.replace('-', '_')
+                s3_key = f"{folder_name}/{file_name}"
+                upload_to_s3(file_name, S3_BUCKET + "-" + STAGE, s3_key)
+
+            except Exception as table_error:
+                logger.error(f"Error procesando tabla {table}: {table_error}")
+
+            finally:
+                table_end_time = datetime.now()
+                logger.info(f"Finalización de tabla {table}. Duración: {table_end_time - table_start_time}")
     except Exception as e:
-        logger.error(f"Error durante el proceso: {e}")
+        logger.error(f"Error durante el proceso general: {e}")
     finally:
-        duration = datetime.now() - start_time
-        logger.info(f"Proceso completado. Duración total: {duration}")
+        process_end_time = datetime.now()
+        logger.info(f"Proceso completado. Inicio: {start_time}, Fin: {process_end_time}, Duración total: {process_end_time - start_time}")
