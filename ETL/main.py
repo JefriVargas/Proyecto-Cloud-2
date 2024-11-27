@@ -41,6 +41,7 @@ MYSQL_HOST = os.getenv("MYSQL_HOST")
 MYSQL_USER = os.getenv("MYSQL_USER")
 MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
 MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+MYSQL_PORT = os.getenv("MYSQL_PORT")
 
 athena = boto3.client(
     "athena",
@@ -114,6 +115,7 @@ def load_to_mysql(data, table_name):
             user=MYSQL_USER,
             password=MYSQL_PASSWORD,
             database=MYSQL_DATABASE,
+            port=int(MYSQL_PORT)
         )
         with connection.cursor() as cursor:
             for record in data:
