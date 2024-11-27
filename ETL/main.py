@@ -115,16 +115,23 @@ def load_to_mysql(data, table_name):
             user=MYSQL_USER,
             password=MYSQL_PASSWORD,
             database=MYSQL_DATABASE,
-            port=int(MYSQL_PORT)
+            port=MYSQL_PORT
         )
         with connection.cursor() as cursor:
             for record in data:
+                if hasattr(record, "model_dump"):
+                    record = record.model_dump()  # Pydantic 2.x
+
+                if not isinstance(record, dict):
+                    logger.warning(f"El registro no es un diccionario: {record}")
+                    continue
+
                 columns = ", ".join(record.keys())
                 placeholders = ", ".join(["%s"] * len(record))
                 sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
                 cursor.execute(sql, list(record.values()))
         connection.commit()
-        logger.info(f"{len(data)} registros cargados en la tabla {table_name}.")
+        logger.info(f"Datos cargados en la tabla {table_name}.")
     except Exception as e:
         logger.error(f"Error cargando datos en MySQL: {e}")
         raise
