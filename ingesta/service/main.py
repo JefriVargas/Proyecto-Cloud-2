@@ -18,7 +18,7 @@ CONTAINER_NAME = os.getenv("CONTAINER_NAME")
 
 tables = [table.strip() + '-' + STAGE for table in DYNAMODB_TABLES.split(",")]
 
-log_directory = "/home/ubuntu/Proyecto-Cloud-2/logs"
+log_directory = "/logs"
 os.makedirs(log_directory, exist_ok=True)
 
 log_file = os.path.join(log_directory, f"{CONTAINER_NAME}.log")
@@ -31,7 +31,7 @@ logging.basicConfig(
     ]
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 dynamodb = boto3.client(
     'dynamodb',
