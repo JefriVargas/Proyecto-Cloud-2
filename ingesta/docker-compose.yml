@@ -15,6 +15,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Horarios
+      CONTAINER_NAME: microservice1
     container_name: dynamodb_microservice1
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
@@ -26,6 +27,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Ordenes
+      CONTAINER_NAME: microservice2
     container_name: dynamodb_microservice2
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
@@ -36,6 +38,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Peliculas
+      CONTAINER_NAME: microservice3
     container_name: dynamodb_microservice3
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
@@ -46,6 +49,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Productos
+      CONTAINER_NAME: microservice4
     container_name: dynamodb_microservice4
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
@@ -56,6 +60,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Reservas,Usuarios
+      CONTAINER_NAME: microservice5
     container_name: dynamodb_microservice5
     volumes:
       - /home/ubuntu/Proyecto-Cloud-2/logs:/logs
