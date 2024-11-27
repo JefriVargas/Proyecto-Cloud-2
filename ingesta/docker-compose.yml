@@ -1,9 +1,9 @@
 version: "3.9"
 
 x-aws-env: &aws-credentials
-  AWS_ACCESS_KEY_ID: ASIAVRUVPMCXU5BU54FM
-  AWS_SECRET_ACCESS_KEY: fe5L/aCFqEA+qik2SKt1WRAtW7moUaNJvVTHe26+
-  AWS_SESSION_TOKEN: IQoJb3JpZ2luX2VjEM3//////////wEaCXVzLXdlc3QtMiJHMEUCIC+Wbfi5s9jfk1QdE+CRdR6z/wHPvmC2mfI4aICt4zxBAiEA+KWFBzaxhzvR52TeWY0tocr/JhhIkhF9uUixGdddEjkqnAIIZhAAGgwzODE0OTE4MzA5NTkiDARgAJwHzjNr/r5tNSr5AQkSv1XgbpV6TaYXQLMBAFNZmst8PAltkUa4rF74Onna67+XhxOWP8HDqtBDDI61ieYCfZ6jxgkE4JDVbfH+MgB0do2EFD1cB0LZqJu9NJvV3oJC+SeeCCJB9S52lp3JBijPwR+JRa+17IdgMakGUAtBDHl1+gzdAKorYHuxFoE6iJn4IV712Fj8ASLkV3eZTW0cA7JglFxiRGRgUhcZBkujMsZu4knvhMeub6YUXp9frtVb/sB0V1ZWIP9irXi1jw0XNY/3kO44q8SFrqzl+JM0YSkuMdOFnJrJ1CMXYlSRhFHe0A5sLMX4Nukjr4aSL8hCJ/6MvY38uTD81O65BjqdAcC8hbwOL7N8CtzkGJ4IB37X098kqOQWgegnFI5TlJUqoF9T3S+i1wQoWvsEJmt8Fs/To5HV4qBh/MQ9GdL6Y6Kb4/+9qz9KdE+vI74i1Ac9b24S/HDN0HmpYvApzok4O36tXB+9jBv+CCUiLW44vhEbSGI7STqy112v4Qw7xiBJFFNWx7IVlOv+3yjnnhMPPHow8Lf0Gm7J1rA223I=
+  AWS_ACCESS_KEY_ID: ASIAVRUVPMCXYDQJ2X4U
+  AWS_SECRET_ACCESS_KEY: 7avOt4yywPbvmVNku/Rg9LYPOV0oCXQ/qhzO6ies
+  AWS_SESSION_TOKEN: IQoJb3JpZ2luX2VjEJf//////////wEaCXVzLXdlc3QtMiJHMEUCIGuvmbPlOrrhYsB3aKAUW0GOvn/SltkqwH1lTnm8ftvyAiEAyiCYC4yGrjT/LbJJcEuNkRqVcuQeJw8t/hxWfO9XtncqnAIIPxAAGgwzODE0OTE4MzA5NTkiDBgsKGrPi92ZkURVSCr5AZUYIz0hwtkFtXQzp1tROENBWTMfGO2BCBGygnVbMsiWYCmUY6/siAbOr/cu3eBh0YdBnktwmoGc6jbDM5GtSUW+6ve+0yF7hr827RpTXhIzP0uKoayUlm64lWefqAk9TgWpyfSBbPMDJMt6rqRW2zCMHW/69iFlKeEdMQ9mg/Zo5iNN84hz5c6n8oaYofbGNbm/RKRXsAO6pN9zI4dV/WnEaFzkfuZfIWXRXx8sKt1O+OK7nQMraDgoz/FRzxHpmrbvnEIx83mzdWtPuD1f78bSXApJ0gaWi8lme0KRO2A9TOmxsHn1iVyP/GVkQDhdwW7wJejxO5mDrjCj85q6BjqdAfZcwT9GbTzcsR2UfGjZwww+c/NF5Oe97Wuz8nUdAF/GzrNh/AsN0BgkOX7p4zLkd0lVITbogONprkvlf7crPrAGi1aqWtMxI2MwDnZgAlLTM/rbx2opSTubFC+gGNc0N24Gr2rWwXDrxeUm2YRNrgmjjZVShx9dz2vIG+4Tx868x7EwLEE23iwBVyzfAq59zK2skiPpQAm/Rc/0750=
   AWS_REGION: us-east-1
   S3_BUCKET: ciencia-de-datos
   STAGE: dev
@@ -15,6 +15,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Horarios
+      CONTAINER_NAME: microservice1
     container_name: dynamodb_microservice1
 
   microservice2:
@@ -23,6 +24,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Ordenes
+      CONTAINER_NAME: microservice2
     container_name: dynamodb_microservice2
 
   microservice3:
@@ -31,6 +33,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Peliculas
+      CONTAINER_NAME: microservice3
     container_name: dynamodb_microservice3
 
   microservice4:
@@ -39,6 +42,7 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Productos
+      CONTAINER_NAME: microservice4
     container_name: dynamodb_microservice4
 
   microservice5:
@@ -47,4 +51,5 @@ services:
     environment:
       <<: *aws-credentials
       DYNAMODB_TABLES: Reservas,Usuarios
+      CONTAINER_NAME: microservice5
     container_name: dynamodb_microservice5
